@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <item type="id" name="merchant_icon_img"/>
+    <item type="id" name="merchant_name_txt"/>
+    <item type="id" name="merchant_coupon_txt"/>
+    <item type="id" name="merchant_loaction_txt"/>
+    <item type="id" name="merchant_distance_txt"/>
+    <item type="id" name="merchant_group_img"/>
+    <item type="id" name="merchant_card_img"/>
+    <item type="id" name="merchant_counp_img"/>
+</resources>

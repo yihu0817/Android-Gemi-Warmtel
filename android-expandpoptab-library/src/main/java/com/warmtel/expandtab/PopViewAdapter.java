@@ -36,6 +36,7 @@ public class PopViewAdapter extends BaseAdapter {
     }
 
     public void setList(List<KeyValueBean> list) {
+
         this.list = list;
         notifyDataSetChanged();
     }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@android:color/white"
+        android:padding="10dp" >
+
+        <ImageView
+            android:id="@+id/merchant_icon_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
+
+        <TextView
+            android:id="@id/merchant_name_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/merchant_icon_img"
+            android:singleLine="true"
+            android:layout_marginLeft="5dp"
+            android:text="瑞庭竹岛酒店" />
+
+        <TextView
+            android:id="@id/merchant_coupon_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/merchant_name_txt"
+            android:layout_toRightOf="@id/merchant_icon_img"
+            android:singleLine="true"
+            android:layout_marginLeft="5dp"
+            android:text="网上预定入住可享返现优惠" />
+
+        <TextView
+            android:id="@id/merchant_loaction_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_alignBottom="@id/merchant_icon_img"
+            android:layout_toLeftOf="@id/merchant_distance_txt"
+            android:layout_toRightOf="@id/merchant_icon_img"
+            android:singleLine="true"
+            android:text="四川省成都市高新区天华二路219号天府软件园C区6号楼1楼" />
+
+        <TextView
+            android:id="@id/merchant_distance_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/merchant_icon_img"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:drawableLeft="@drawable/info_map"
+            android:text="203m" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" >
+
+            <ImageView
+                android:id="@id/merchant_card_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/near_card"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@id/merchant_group_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/merchant_card_img"
+                android:background="@drawable/near_group"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@id/merchant_counp_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/merchant_card_img"
+                android:background="@drawable/near_ticket"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
