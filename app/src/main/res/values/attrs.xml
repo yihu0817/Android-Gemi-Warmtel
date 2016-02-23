@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common Title -->
+    <declare-styleable name="TitleBarView">
+        <attr name="left_bar_icon" format="reference"/>
+        <attr name="right_bar_icon" format="reference"/>
+    </declare-styleable>
+</resources>

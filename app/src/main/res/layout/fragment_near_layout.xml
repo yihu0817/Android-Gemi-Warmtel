@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.near.NearFragment">
+
+    <com.warmtel.gemi.ui.common.TitleBarView
+        android:id="@+id/title_bar_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:left_bar_icon="@drawable/near_logo"
+        />
+
+    <com.warmtel.expandtab.ExpandPopTabView
+        android:id="@+id/near_expandpoptabview"
+        android:layout_width="match_parent"
+        android:layout_below="@id/title_bar_view"
+        android:layout_height="wrap_content"
+        app:tab_toggle_btn_bg="@drawable/near_expoptab_selector"
+        app:tab_toggle_btn_font_color="@android:color/background_dark"/>
+
+</RelativeLayout>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">格米优惠</string>
+
+    <string name="near_title">附近</string>
+    <string name="cheap_title">找便宜</string>
+    <string name="favor_title">特惠</string>
+    <string name="pocket_title">口袋</string>
+    <string name="more_title">更多</string>
+</resources>

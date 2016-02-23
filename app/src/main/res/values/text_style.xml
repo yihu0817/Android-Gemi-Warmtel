@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    文字style
+    为了修改方便, 不要在布局文件内直接设定字体大小, 统一用style
+
+-->
+<resources>
+
+    <!-- 特大号,一般是标题 -->
+    <style name="common_text_huge">
+        <item name="android:textColor">@android:color/background_dark</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="common_text_commit">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 大号,一般是列表项的标题 -->
+    <style name="common_text_large">
+        <item name="android:textColor">@android:color/background_dark</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- 中号, 一般列表项的说明文字 或者 某块的副标题 -->
+    <style name="common_text_normal">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <!-- 小号,一般是某块的说明文字 -->
+    <style name="common_text_small">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <!-- 超小号, 时间, 人均等 -->
+    <style name="common_text_mini">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">9dp</item>
+    </style>
+    <!-- 导航标题 -->
+    <style name="common_title_text" parent="common_text_huge">
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowColor">@color/shadow_black</item>
+        <item name="android:shadowRadius">0</item>
+    </style>
+</resources>

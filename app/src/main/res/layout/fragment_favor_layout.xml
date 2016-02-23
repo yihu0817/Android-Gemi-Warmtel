@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:iqqh="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.near.NearFragment">
+    <com.warmtel.gemi.ui.common.TitleBarView
+        android:layout_alignParentTop="true"
+        android:id="@+id/title"
+        style="@style/common_title_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        iqqh:left_bar_icon="@drawable/farvor_title" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title"
+        android:gravity="center"
+        android:textColor="@android:color/background_dark"
+        android:text="@string/favor_title" />
+
+</RelativeLayout>

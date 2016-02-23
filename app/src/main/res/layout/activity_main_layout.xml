@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/common_bg_white">
+
+    <RadioGroup
+        android:id="@+id/tab_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@drawable/bottom_bg">
+
+        <RadioButton
+            android:id="@+id/tab_radio_near"
+            style="@style/radio_button_style_three"
+            android:checked="true"
+            android:drawableTop="@drawable/main_tab_near_selector"
+            android:text="@string/near_title" />
+
+        <RadioButton
+            android:id="@+id/tab_radio_cheap"
+            style="@style/radio_button_style_three"
+            android:drawableTop="@drawable/main_tab_cheap_selector"
+            android:text="@string/cheap_title" />
+
+        <RadioButton
+            android:id="@+id/tab_radio_favor"
+            style="@style/radio_button_style_three"
+            android:drawableTop="@drawable/main_tab_favor_selector"
+            android:text="@string/favor_title" />
+
+        <RadioButton
+            android:id="@+id/tab_radio_pocket"
+            style="@style/radio_button_style_three"
+            android:drawableTop="@drawable/main_tab_pocket_selector"
+            android:text="@string/pocket_title" />
+
+        <RadioButton
+            android:id="@+id/tab_radio_more"
+            style="@style/radio_button_style_three"
+            android:drawableTop="@drawable/main_tab_more_selector"
+            android:text="@string/more_title" />
+    </RadioGroup>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/fragment_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tab_radio_group"/>
+</RelativeLayout>
