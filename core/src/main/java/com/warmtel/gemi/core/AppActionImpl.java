@@ -2,70 +2,77 @@
 package com.warmtel.gemi.core;
 
 import android.content.Context;
-import android.text.TextUtils;
+import android.os.AsyncTask;
+import android.util.Log;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.warmtel.gemi.api.Api;
+import com.warmtel.gemi.api.ApiImp;
+import com.warmtel.gemi.model.ConfigResult;
+import com.warmtel.gemi.model.MerchantBean;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * AppAction接口的实现类
  *
-
  */
 public class AppActionImpl implements AppAction {
 
-    private final static int LOGIN_OS = 1; // 表示Android
-    private final static int PAGE_SIZE = 20; // 默认每页20条
-
     private Context context;
-//    private Api api;
+    private Api mApi;
 
     public AppActionImpl(Context context) {
         this.context = context;
-//        this.api = new ApiImpl();
+        this.mApi = new ApiImp();
     }
 
     @Override
-    public void sendSmsCode(final String phoneNum, final ActionCallbackListener<Void> listener) {
-        // 参数检查
-        if (TextUtils.isEmpty(phoneNum)) {
-            if (listener != null) {
-                listener.onFailure(ErrorEvent.PARAM_NULL, "手机号为空");
+    public void getNearbyConfig(final ActionCallbackListener<ConfigResult> listener) {
+        new AsyncTask<String, Void, ConfigResult>(){
+            @Override
+            protected ConfigResult doInBackground(String... params) {
+                try {
+                    return mApi.getNearbyConfigs();
+                } catch (IOException e) {
+                    return null;
+                }
             }
-            return;
-        }
-        Pattern pattern = Pattern.compile("1\\d{10}");
-        Matcher matcher = pattern.matcher(phoneNum);
-        if (!matcher.matches()) {
-            if (listener != null) {
-                listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "手机号不正确");
-            }
-            return;
-        }
 
-//        // 请求Api
-//        new AsyncTask<Void, Void, ApiResponse<Void>>() {
-//            @Override
-//            protected ApiResponse<Void> doInBackground(Void... voids) {
-//                return api.sendSmsCode4Register(phoneNum);
-//            }
-//
-//            @Override
-//            protected void onPostExecute(ApiResponse<Void> response) {
-//                if (listener != null && response != null) {
-//                    if (response.isSuccess()) {
-//                        listener.onSuccess(null);
-//                    } else {
-//                        listener.onFailure(response.getEvent(), response.getMsg());
-//                    }
-//                }
-//            }
-//        }.execute();
+            @Override
+            protected void onPostExecute(ConfigResult configResult) {
+                Log.e("tag","configResult :"+configResult);
+               if(configResult != null){
+                   listener.onSuccess(configResult);
+               }else{
+                   listener.onFailure(ErrorEvent.PARAM_ILLEGAL,ErrorEvent.PARAM_NULL);
+               }
+            }
+        }.execute();
     }
 
     @Override
-    public void register(String phoneNum, String code, String password, ActionCallbackListener<Void> listener) {
+    public void getNearbyAround(final ActionCallbackListener<ArrayList<MerchantBean>> listener) {
+        new AsyncTask<String, Void, ArrayList<MerchantBean>>(){
 
+            @Override
+            protected ArrayList<MerchantBean> doInBackground(String... params) {
+                try {
+                    return  mApi.getNearbyAround();
+                } catch (IOException e) {
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(ArrayList<MerchantBean> merchantLists) {
+                if(merchantLists != null){
+                    listener.onSuccess(merchantLists);
+                }else{
+                    listener.onFailure(ErrorEvent.PARAM_ILLEGAL,ErrorEvent.PARAM_NULL);
+                }
+            }
+        }.execute();
     }
 
 }

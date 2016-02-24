@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -18,7 +17,7 @@ import com.warmtel.gemi.ui.pocket.PocketFragment;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private static final int TAB_NEAR = 0;  //附近
     private static final int TAB_CHEAP = 1; //找便宜
     private static final int TAB_FAVOR = 2; //特惠

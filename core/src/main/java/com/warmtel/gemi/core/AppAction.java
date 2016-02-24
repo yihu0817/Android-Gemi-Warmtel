@@ -1,28 +1,26 @@
 
 package com.warmtel.gemi.core;
 
+import com.warmtel.gemi.model.ConfigResult;
+import com.warmtel.gemi.model.MerchantBean;
+
+import java.util.ArrayList;
+
 /**
  * 接收app层的各种Action
  *
  */
 public interface AppAction {
     /**
-     * 发送验证码
+     * 获取二级菜单数据
      *
-     * @param phoneNum 手机号
      * @param listener 回调监听器
      */
-    public void sendSmsCode(String phoneNum, ActionCallbackListener<Void> listener);
+    public void getNearbyConfig(final ActionCallbackListener<ConfigResult> listener);
 
     /**
-     * 注册
-     *
-     * @param phoneNum 手机号
-     * @param code     验证码
-     * @param password 密码
-     * @param listener 回调监听器
+     * 获取附近列表数据
+     * @param listener
      */
-    public void register(String phoneNum, String code, String password, ActionCallbackListener<Void> listener);
-
-
+    public void getNearbyAround(final ActionCallbackListener<ArrayList<MerchantBean>> listener);
 }

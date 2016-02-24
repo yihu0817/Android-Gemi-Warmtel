@@ -1,1 +1,1 @@
-include ':app', ':core', ':android-expandpoptab-library'
+include ':app', ':core', ':android-expandpoptab-library', ':api', ':model'
