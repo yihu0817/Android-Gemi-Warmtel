@@ -41,9 +41,9 @@ public class AppActionImpl implements AppAction {
         new AsyncTask<String, Void, ConfigResult>() {
             @Override
             protected void onPreExecute() {
-               String configsStr = ApiPreference.getInstance(context).getCache(Api.BASE_URL + Api.configs);
+                String configsStr = ApiPreference.getInstance(context).getCache(Api.BASE_URL + Api.configs);
                 if (configsStr != null) {
-                    ConfigResult configResult =  new Gson().fromJson(configsStr, ConfigResult.class);
+                    ConfigResult configResult = new Gson().fromJson(configsStr, ConfigResult.class);
                     listener.onStart(configResult);
                 }
             }
@@ -107,7 +107,7 @@ public class AppActionImpl implements AppAction {
             InputStream inputStream = context.getAssets().open("autoComplete");
             String jsonstr = readStrFromInputStream(inputStream);
             Gson gson = new Gson();
-            Log.e("tag","jsonstr  :"+jsonstr);
+            Log.e("tag", "jsonstr  :" + jsonstr);
             AutoMessageDTO autoMessageDTO = gson.fromJson(jsonstr, AutoMessageDTO.class);
             return autoMessageDTO;
         } catch (IOException e) {

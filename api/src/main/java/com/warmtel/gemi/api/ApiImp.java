@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.warmtel.gemi.api.net.NetUtil;
-import com.warmtel.gemi.api.utils.ApiPreference;
 import com.warmtel.gemi.model.ConfigResult;
 import com.warmtel.gemi.model.MerchantBean;
 
@@ -23,17 +22,8 @@ public class ApiImp implements Api {
     }
 
     @Override
-    public ConfigResult getNearbyConfigs() {
-        String configsStr = null;
-        try {
-            configsStr = NetUtil.getInstance(mContext).getDataByConnectNet(configs);
-        } catch (IOException io) {
-                configsStr = ApiPreference.getInstance(mContext).getCache(Api.BASE_URL + Api.configs);
-        }
-        if (configsStr == null) {
-            configsStr = ApiPreference.getInstance(mContext).getCache(Api.BASE_URL + Api.configs);
-        }
-
+    public ConfigResult getNearbyConfigs() throws IOException {
+        String configsStr = NetUtil.getInstance(mContext).getDataByConnectNet(configs);
         if (configsStr == null) {
             return null;
         }
@@ -41,18 +31,8 @@ public class ApiImp implements Api {
     }
 
     @Override
-    public ArrayList<MerchantBean> getNearbyAround() {
-        String aroundStr = null;
-        try {
-            aroundStr = NetUtil.getInstance(mContext).getDataByConnectNet(around);
-        } catch (IOException io) {
-            if (aroundStr == null) {
-                aroundStr = ApiPreference.getInstance(mContext).getCache(Api.BASE_URL + Api.around);
-            }
-        }
-        if (aroundStr == null) {
-            aroundStr = ApiPreference.getInstance(mContext).getCache(Api.BASE_URL + Api.around);
-        }
+    public ArrayList<MerchantBean> getNearbyAround() throws IOException {
+        String aroundStr = NetUtil.getInstance(mContext).getDataByConnectNet(around);
         if (aroundStr == null) {
             return null;
         }
