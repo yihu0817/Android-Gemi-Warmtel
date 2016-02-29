@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main_layout);
-
+        setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
         mViewPager = (ViewPager) findViewById(R.id.fragment_viewpager);
         mRadioGroup = (RadioGroup) findViewById(R.id.tab_radio_group);
         mNearRadioBtn = (RadioButton) findViewById(R.id.tab_radio_near);

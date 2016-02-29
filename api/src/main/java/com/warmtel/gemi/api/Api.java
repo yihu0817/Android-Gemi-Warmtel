@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * 定义接口
  */
 public interface Api {
+    public static final String BASE_URL = "http://www.warmtel.com:8080/";
     public static final String configs = "configs";
     public static final String around = "around";
 

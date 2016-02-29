@@ -1,6 +1,7 @@
 
 package com.warmtel.gemi.core;
 
+import com.warmtel.gemi.model.AutoMessageDTO;
 import com.warmtel.gemi.model.ConfigResult;
 import com.warmtel.gemi.model.MerchantBean;
 
@@ -23,4 +24,6 @@ public interface AppAction {
      * @param listener
      */
     public void getNearbyAround(final ActionCallbackListener<ArrayList<MerchantBean>> listener);
+
+    public AutoMessageDTO getCheapAutoComplete(String wordKey);
 }

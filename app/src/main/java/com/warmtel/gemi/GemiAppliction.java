@@ -1,4 +1,4 @@
-package com.warmtel.gemi.ui;
+package com.warmtel.gemi;
 
 import android.app.Application;
 

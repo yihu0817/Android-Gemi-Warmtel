@@ -1,7 +1,10 @@
 package com.warmtel.gemi.api;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.warmtel.gemi.api.net.NetUtil;
+import com.warmtel.gemi.api.utils.ApiPreference;
 import com.warmtel.gemi.model.ConfigResult;
 import com.warmtel.gemi.model.MerchantBean;
 
@@ -13,18 +16,46 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ApiImp implements Api {
+    public Context mContext;
 
-    @Override
-    public ConfigResult getNearbyConfigs() throws IOException {
-        String configsStr = NetUtil.getInstance().getDataByConnectNet(configs);
-        Gson gson = new Gson();
-        ConfigResult configResult =  gson.fromJson(configsStr, ConfigResult.class);
-        return configResult;
+    public ApiImp(Context context) {
+        this.mContext = context;
     }
 
     @Override
-    public ArrayList<MerchantBean> getNearbyAround() throws IOException {
-        String aroundStr = NetUtil.getInstance().getDataByConnectNet(around);
+    public ConfigResult getNearbyConfigs() {
+        String configsStr = null;
+        try {
+            configsStr = NetUtil.getInstance(mContext).getDataByConnectNet(configs);
+        } catch (IOException io) {
+                configsStr = ApiPreference.getInstance(mContext).getCache(Api.BASE_URL + Api.configs);
+        }
+        if (configsStr == null) {
+            configsStr = ApiPreference.getInstance(mContext).getCache(Api.BASE_URL + Api.configs);
+        }
+
+        if (configsStr == null) {
+            return null;
+        }
+        return new Gson().fromJson(configsStr, ConfigResult.class);
+    }
+
+    @Override
+    public ArrayList<MerchantBean> getNearbyAround() {
+        String aroundStr = null;
+        try {
+            aroundStr = NetUtil.getInstance(mContext).getDataByConnectNet(around);
+        } catch (IOException io) {
+            if (aroundStr == null) {
+                aroundStr = ApiPreference.getInstance(mContext).getCache(Api.BASE_URL + Api.around);
+            }
+        }
+        if (aroundStr == null) {
+            aroundStr = ApiPreference.getInstance(mContext).getCache(Api.BASE_URL + Api.around);
+        }
+        if (aroundStr == null) {
+            return null;
+        }
         return parseJsonToMerchantList(aroundStr);
     }
 

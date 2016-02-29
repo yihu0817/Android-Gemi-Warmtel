@@ -12,18 +12,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.warmtel.expandtab.ExpandPopTabView;
 import com.warmtel.expandtab.KeyValueBean;
 import com.warmtel.expandtab.PopOneListView;
 import com.warmtel.expandtab.PopTwoListView;
+import com.warmtel.gemi.GemiAppliction;
 import com.warmtel.gemi.R;
 import com.warmtel.gemi.core.ActionCallbackListener;
 import com.warmtel.gemi.model.CirclesBean;
 import com.warmtel.gemi.model.ConfigInfo;
 import com.warmtel.gemi.model.ConfigResult;
 import com.warmtel.gemi.model.MerchantBean;
-import com.warmtel.gemi.ui.GemiAppliction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,26 +60,16 @@ public class NearFragment extends Fragment {
     /**
      * 设置二级菜单数据源
      */
-    public void setExpandPopTabViewData(){
+    public void setExpandPopTabViewData() {
         GemiAppliction.mAction.getNearbyConfig(new ActionCallbackListener<ConfigResult>() {
             @Override
+            public void onStart(ConfigResult data) {
+                setmExpandPopTabData(data);
+            }
+
+            @Override
             public void onSuccess(ConfigResult data) {
-                ConfigInfo info = data.getInfo();
-
-                List<KeyValueBean> mParentLists = new ArrayList<>();//父区域
-                List<ArrayList<KeyValueBean>> mChildrenListLists = new ArrayList<>();//子区域
-                for (CirclesBean circlesBean : info.getAreaKey()) {
-                    KeyValueBean keyValueBean = new KeyValueBean();
-                    keyValueBean.setKey(circlesBean.getKey());
-                    keyValueBean.setValue(circlesBean.getValue());
-                    mParentLists.add(keyValueBean);
-                    mChildrenListLists.add((ArrayList<KeyValueBean>) circlesBean.getCircles());
-                }
-
-                addItem(mExpandPopTabView, info.getDistanceKey(), "", "距离");
-                addItem(mExpandPopTabView, info.getIndustryKey(), "", "行业");
-                addItem(mExpandPopTabView, info.getSortKey(), "", "排序");
-                addItem(mExpandPopTabView, mParentLists, mChildrenListLists, "锦江区", "合江亭", "区域");
+                setmExpandPopTabData(data);
             }
 
             @Override
@@ -89,11 +79,35 @@ public class NearFragment extends Fragment {
         });
     }
 
+
+    public void setmExpandPopTabData(ConfigResult data){
+        ConfigInfo info = data.getInfo();
+
+        List<KeyValueBean> mParentLists = new ArrayList<>();//父区域
+        List<ArrayList<KeyValueBean>> mChildrenListLists = new ArrayList<>();//子区域
+        for (CirclesBean circlesBean : info.getAreaKey()) {
+            KeyValueBean keyValueBean = new KeyValueBean();
+            keyValueBean.setKey(circlesBean.getKey());
+            keyValueBean.setValue(circlesBean.getValue());
+            mParentLists.add(keyValueBean);
+            mChildrenListLists.add((ArrayList<KeyValueBean>) circlesBean.getCircles());
+        }
+        mExpandPopTabView.removeAllViews();
+        addItem(mExpandPopTabView, info.getDistanceKey(), "", "距离");
+        addItem(mExpandPopTabView, info.getIndustryKey(), "", "行业");
+        addItem(mExpandPopTabView, info.getSortKey(), "", "排序");
+        addItem(mExpandPopTabView, mParentLists, mChildrenListLists, "锦江区", "合江亭", "区域");
+    }
     /**
      * 设置列表数据
      */
-    public void setListViewData(){
+    public void setListViewData() {
         GemiAppliction.mAction.getNearbyAround(new ActionCallbackListener<ArrayList<MerchantBean>>() {
+            @Override
+            public void onStart(ArrayList<MerchantBean> data) {
+                mMerchantAdapter.setListData(data);
+            }
+
             @Override
             public void onSuccess(ArrayList<MerchantBean> data) {
                 mMerchantAdapter.setListData(data);
@@ -118,6 +132,7 @@ public class NearFragment extends Fragment {
         });
         expandTabView.addItemToExpandTab(defaultShowText, popOneListView);
     }
+
     public void addItem(ExpandPopTabView expandTabView, List<KeyValueBean> parentLists,
                         List<ArrayList<KeyValueBean>> childrenListLists, String defaultParentSelect, String defaultChildSelect, String defaultShowText) {
         PopTwoListView popTwoListView = new PopTwoListView(getActivity());
@@ -196,7 +211,7 @@ public class NearFragment extends Fragment {
 
 //            AsyncMemoryFileCacheImageLoader.getInstance(context).loadBitmap(
 //                    getResources(), merchant.getPicUrl(), holder.iconImg);
-            Picasso.with(context).load(merchant.getPicUrl()).into(holder.iconImg);
+            Glide.with(context).load(merchant.getPicUrl()).into(holder.iconImg);
 
             holder.nameTxt.setText(merchant.getName());
             holder.couponTxt.setText(merchant.getCoupon());

@@ -6,4 +6,12 @@
     <string name="favor_title">特惠</string>
     <string name="pocket_title">口袋</string>
     <string name="more_title">更多</string>
+
+    <!-- 搜索 -->
+    <string name="input_keyword">请输入关键字</string>
+    <string name="search_Hint">搜索</string>
+    <string name="search_Lable"></string>
+    <string name="search_result">搜索结果</string>
+    <string name="search_no_result">我想要的的优惠</string>
+    <string name="search_clear_key">清空记录</string>
 </resources>

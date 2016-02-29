@@ -1,6 +1,10 @@
 package com.warmtel.gemi.api.net;
 
+import android.content.Context;
 import android.util.Log;
+
+import com.warmtel.gemi.api.Api;
+import com.warmtel.gemi.api.utils.ApiPreference;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,28 +16,33 @@ import java.net.URL;
 public class NetUtil {
     public String mBaseUrl = "http://www.warmtel.com:8080/";
     private static NetUtil NETUTIL = null;
-
-    public static NetUtil getInstance() {
+    public Context mContext;
+    public static NetUtil getInstance(Context context) {
         if (NETUTIL == null) {
-            NETUTIL = new NetUtil();
+            NETUTIL = new NetUtil(context);
         }
         return NETUTIL;
     }
 
-    private NetUtil() {
+    private NetUtil(Context context) {
+        this.mContext = context;
     }
 
     public String getDataByConnectNet(String httpUrl) throws IOException {
-        mBaseUrl = "http://www.warmtel.com:8080/" + httpUrl;
-        Log.e("tag",mBaseUrl);
+        mBaseUrl = Api.BASE_URL + httpUrl;
         URL url = new URL(mBaseUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
-        connection.setConnectTimeout(5000);
-        connection.setReadTimeout(8000);
+        connection.setConnectTimeout(10000);
+        connection.setReadTimeout(15000);
         if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
             InputStream inputStream = connection.getInputStream();
-            return readStrFromInputStream(inputStream);
+            String responseStr =  readStrFromInputStream(inputStream);
+            // TODO: 2016/2/29  添加缓存
+            ApiPreference.getInstance(mContext).putCache(mBaseUrl,responseStr);
+
+            Log.e("tag","添加缓存 >>>>>");
+            return responseStr;
         } else {
             return null;
         }
@@ -53,7 +62,7 @@ public class NetUtil {
         while ((line = reader.readLine()) != null) {
             sb.append(line);
         }
-        Log.e("tag","sb.toString()  "+sb.toString());
+        Log.e("tag","json :"+sb.toString());
         reader.close();
         is.close();
         return sb.toString();
